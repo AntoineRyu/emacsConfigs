@@ -19,8 +19,8 @@
 (setq git-gutter+-diff-options '("--ignore-space-at-eol"))
 
 
-(require 'smartparens-config)
-(smartparens-global-mode t)
+; (require 'smartparens-config)
+; (smartparens-global-mode t)
 
 (global-linum-mode t)
 
