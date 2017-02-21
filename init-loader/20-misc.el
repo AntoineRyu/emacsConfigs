@@ -15,8 +15,8 @@
 (global-auto-revert-mode 1) ; バッファ自動再読み込み
 
 (require 'git-gutter-fringe+)
-(global-git-gutter+-mode t)
-(setq git-gutter+-diff-options '("--ignore-space-at-eol"))
+;(global-git-gutter+-mode t)
+;(setq git-gutter+-diff-options '("--ignore-space-at-eol"))
 
 
 ; (require 'smartparens-config)
