@@ -31,7 +31,7 @@
 (global-set-key (kbd "C-\+") 'other-window-or-split)
 (global-set-key (kbd "C-\-") 'delete-other-windows)
 
-(global-set-key (kbd "C-SPC") 'company-complete)
+;(global-set-key (kbd "C-SPC") 'company-complete)
 
 ;; navigation inside window
 (global-set-key [M-up]    'goto-last-change)
