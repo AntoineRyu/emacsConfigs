@@ -13,10 +13,6 @@
   (interactive)
   (scroll-up 1))
 
-(global-set-key (kbd "<C-down>") 'scroll-up-keep-cursor)
-(global-set-key (kbd "<C-up>") 'scroll-down-keep-cursor)
-(global-set-key (kbd "C-M-g") 'goto-line)
-
 ;; M-n and M-p
 (global-unset-key "\M-p")
 (global-unset-key "\M-n")
@@ -31,6 +27,12 @@
   (interactive "p")
   (next-line n)
   (scroll-up n))
+
+(global-set-key (kbd "<C-down>") 'scroll-down-in-place)
+(global-set-key (kbd "<C-up>") 'scroll-up-in-place)
+;(global-set-key (kbd "<C-down>") 'scroll-up-keep-cursor)
+;(global-set-key (kbd "<C-up>") 'scroll-down-keep-cursor)
+;(global-set-key (kbd "C-M-g") 'goto-line)
 
 ;(global-set-key "\M-n" 'scroll-down-in-place)
 ;(global-set-key "\M-p" 'scroll-up-in-place)
