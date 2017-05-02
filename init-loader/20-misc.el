@@ -72,7 +72,7 @@
   (find-file "~/mujin/checkoutroot/itlprocess/python/mujinitlprocess/itlslave.py")
   (find-file "~/mujin/checkoutroot/itlprocess/python/mujinitlprocess/itlmath.py"))
 
-;;"--args mujin_robotbridges_startrealtimezmq --usedummyrobot 1 --usejoystick 1"
+;; Can also define this function in bashrc: gdbmacs(){emacs -Q -l ~/rioux_emacs/init.el --eval "(gdbmacs \"$1\")"}
 (defun gdbmacs (args)
   (interactive)
   (gdb (concat "gdb -i=mi " args)))
