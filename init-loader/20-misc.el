@@ -55,6 +55,24 @@
 ;; Ask before killing emacs
 (setq confirm-kill-emacs 'y-or-n-p)
 
-(ido-mode 1)
+(ido-mode 0)
 (setq ido-enable-flex-matching t)
 (setq x-select-enable-clipboard t)
+
+(defun open-itl ()
+  (interactive)
+  (find-file "~/mujin/checkoutroot/planningcommon/python/mujinplanningcommon/planning/itlplanning3/itlplanner.py")
+  (find-file "~/mujin/checkoutroot/planningcommon/python/mujinplanningcommon/planning/itlplanning3/itlexecutor.py")
+  (find-file "~/mujin/checkoutroot/planningcommon/python/mujinplanningcommon/planning/itlplanning3/itlserver.py")
+  (find-file "~/mujin/checkoutroot/planningcommon/python/mujinplanningcommon/planning/itlplanning3/realtimeitlplanning3.py"))
+
+(defun open-itlprocess ()
+  (interactive)
+  (find-file "~/mujin/checkoutroot/itlprocess/python/mujinitlprocess/itlapi.py")
+  (find-file "~/mujin/checkoutroot/itlprocess/python/mujinitlprocess/itlslave.py")
+  (find-file "~/mujin/checkoutroot/itlprocess/python/mujinitlprocess/itlmath.py"))
+
+;;"--args mujin_robotbridges_startrealtimezmq --usedummyrobot 1 --usejoystick 1"
+(defun gdbmacs (args)
+  (interactive)
+  (gdb (concat "gdb -i=mi " args)))
