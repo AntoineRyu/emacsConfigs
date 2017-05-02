@@ -59,6 +59,9 @@
 (setq ido-enable-flex-matching t)
 (setq x-select-enable-clipboard t)
 
+(setq comint-buffer-maximum-size 10000)
+(add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
+
 (defun open-itl ()
   (interactive)
   (find-file "~/mujin/checkoutroot/planningcommon/python/mujinplanningcommon/planning/itlplanning3/itlplanner.py")
@@ -73,6 +76,9 @@
   (find-file "~/mujin/checkoutroot/itlprocess/python/mujinitlprocess/itlmath.py"))
 
 ;; Can also define this function in bashrc: gdbmacs(){emacs -Q -l ~/rioux_emacs/init.el --eval "(gdbmacs \"$1\")"}
+;; (gdb-many-windows)
 (defun gdbmacs (args)
   (interactive)
-  (gdb (concat "gdb -i=mi " args)))
+  (toggle-frame-maximized)
+  (gdb (concat "gdb -i=mi " args))
+  (gdb-many-windows))
