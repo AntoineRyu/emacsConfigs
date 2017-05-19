@@ -95,3 +95,6 @@
 ;(global-set-key [S-f11]  'helm-bm)
 ;(global-set-key [f12]    'bm-next)
 ;(global-set-key [S-f12]  'bm-previous)
+
+(require 'bind-key)
+(bind-key* "C-M-i" 'scroll-up-in-place)
