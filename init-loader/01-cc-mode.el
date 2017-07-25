@@ -1,11 +1,4 @@
 ;; C,C++ファイル
-(defun my-insert-input-comment () (interactive)
-(insert-string "/* input */"))
-(defun my-insert-output-comment () (interactive)
-(insert-string "/* output */"))
-(defun my-insert-inout-comment () (interactive)
-(insert-string "/* input & output */"))
-
 (require 'indent-style nil t)
 
 ;; cpp-highlight-buffer
@@ -22,18 +15,15 @@
          (background-color . "dim gray")
          nil both nil)))
 
-(defun my-cc-mode-hook ()
-  (if (fboundp 'c-subword-mode)
-      (c-subword-mode t)
-    (subword-mode t))
-   (setq c-basic-offset 4)
-   (setq c-tab-always-indent nil)
-   (c-set-offset 'substatement-open 0)
-   (cpp-highlight-buffer t)
-   (define-key c-mode-base-map (kbd "C-c i") 'my-insert-input-comment)
-   (define-key c-mode-base-map (kbd "C-c o") 'my-insert-output-comment)
-   (define-key c-mode-base-map (kbd "C-c b") 'my-insert-inout-comment))
-(add-hook 'c-mode-common-hook 'my-cc-mode-hook)
+;;(defun my-cc-mode-hook ()
+;;  (if (fboundp 'c-subword-mode)
+;;      (c-subword-mode t)
+;;    (subword-mode t))
+;;   (setq c-basic-offset 4)
+;;   (setq c-tab-always-indent nil)
+;;   (c-set-offset 'substatement-open 0)
+;;   (cpp-highlight-buffer t)
+;;(add-hook 'c-mode-common-hook 'my-cc-mode-hook)
 
 ;; c-mode
 
@@ -51,3 +41,5 @@
 
 ;; idlファイルのデフォルトインデントおかしい
 (setq idl-mode-hook '(lambda () (c-set-style "stroustrup")))
+
+(setq compile-command "jhbuild buildone -n mujin")
