@@ -1,0 +1,19 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Antoine Rioux
+	email = antoine.rioux@mujin.co.jp
+
+[alias]
+	pp = push origin HEAD
+	pl = pull origin HEAD
+    ff = fetch
+    ss = status
+    cm = commit -m
+    ap = add --patch
+	cc = checkout
+	cp = cherry-pick
+	dd = diff
+	st = stash
+	sts = "!git stash show -p stash@{\"$1\"} #"
+	
