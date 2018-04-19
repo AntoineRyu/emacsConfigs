@@ -95,3 +95,5 @@
 
 ;; misc
 (el-get-bundle open-junk-file)
+
+(el-get-bundle flycheck)
