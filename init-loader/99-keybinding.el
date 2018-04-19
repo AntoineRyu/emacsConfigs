@@ -22,9 +22,9 @@
 (global-set-key (kbd "C->")  'helm-ag-project-root)
 (global-set-key (kbd "C-,")  'helm-multi-swoop-all)
 (global-set-key (kbd "C-o")  'helm-find-files) ; overwrite open-line
-(global-set-key (kbd "C-h")  'delete-backward-char); over
+;(global-set-key (kbd "C-h")  'delete-backward-char); over
 (global-set-key (kbd "C-]")  'helm-resume)
-(global-set-key (kbd "C-z")  'helm-occur-from-isearch) ;
+(global-set-key (kbd "C-z")  'helm-occur) ;
 
 ;; window operation
 (global-set-key (kbd "C-t")  'other-window); overwrite transpose-chars
@@ -41,12 +41,12 @@
 ;; git-gutter
 (global-set-key [f1]     'git-gutter+-next-hunk)
 (global-set-key [S-f1]   'git-gutter+-previous-hunk)
-(global-set-key [f2]     'git-gutter+-show-hunk)
-(global-set-key [C-f2]   'git-gutter+-revert-hunk)
+; (global-set-key [f2]     'git-gutter+-show-hunk)
+; (global-set-key [C-f2]   'git-gutter+-revert-hunk)
 
 ;; magit
-(global-set-key [f3]     'magit-status)
-(global-set-key [C-f3]   'magit-diff)
+(global-set-key [f3]     'magit-diff)
+(global-set-key [C-f3]   'magit-status)
 
 ;; align
 (global-set-key [f4]     'align-current)
@@ -57,8 +57,6 @@
 ;; tabbar
 (global-set-key (kbd "C-<tab>") 'tabbar-forward-tab)
 (global-set-key (kbd "C-S-<iso-lefttab>") 'tabbar-backward-tab)
-;(global-set-key (kbd "C-<tab>") 'shk-tabbar-next)
-;(global-set-key (kbd "C-S-<iso-lefttab>") 'shk-tabbar-prev)
 
 ;; tags
 (require 'jedi)
