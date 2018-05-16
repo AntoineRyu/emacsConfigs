@@ -1,6 +1,8 @@
 #!/bin/bash
 # Setup mujin environment for support laptops
 
+sudo apt-get install daemon
+
 if [ ! -f "$MUJIN_PRIVATE_DIR"/mujin_conf.bash ]; then
     mujin_controllercommon_generatemujinconf.py
 fi
@@ -36,6 +38,6 @@ mujin_jhbuildcommon_initjhbuild.bash
 jhbuild -f .jhbuildrc sysdeps --install
 jhbuild
 
-# "sudo service mujin start" and "sudo apt-get install daemon" if there is a complain about daemon.
+sudo service mujin start
 # Use "mujin_webstack_listldapusers.bash" to list the users, "sudo which mujin_env; mujin_webstack_adduser.bash mujin mujin" to add a new user
 
