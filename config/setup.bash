@@ -6,15 +6,15 @@ sudo apt-get install texinfo virtualenv
 #sudo pip install
 
 # My emacs setup
-git clone https://github.com/AntoineRyu/emacsConfigs.git $HOME
+git clone https://github.com/AntoineRyu/emacsConfigs.git $HOME/emacsConfigs
 
 # Terminator from source
-bzr branch lp:terminator $HOME
+bzr branch lp:terminator $HOME/terminator
 cd $HOME/terminator
-./setup.py install --record=install-files.txt
+sudo ./setup.py install --record=install-files.txt
 
 # Copy configs
-cp $HOME/emacsConfigs/configs/.bash_aliases $HOME
-cp $HOME/emacsConfigs/configs/.gitconfig $HOME
-cp $HOME/emacsConfigs/configs/flake8 $HOME/.config
+cp $HOME/emacsConfigs/config/.bash_aliases $HOME
+cp $HOME/emacsConfigs/config/.gitconfig $HOME
+cp $HOME/emacsConfigs/config/flake8 $HOME/.config
 # Terminator configs?
