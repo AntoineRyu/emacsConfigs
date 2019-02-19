@@ -1,4 +1,4 @@
 [flake8]
-ignore = E2,E3,E501,E704,W292,W293,W391,W503
+ignore = E2,E3,E501,E704,E713,E722,W292,W293,W391,W503
 exclude = tests/*
 max-complexity = 10
