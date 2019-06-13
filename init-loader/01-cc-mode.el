@@ -34,10 +34,9 @@
    (setq c++-friend-offset 4)
    (c-set-offset 'innamespace 4)))
 
-(setq auto-mode-alist
-      (append '(("\\.dox\\'" . c++-mode)
-                ("\\.inl\\'" . c++-mode))
-              auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 
 ;; idlファイルのデフォルトインデントおかしい
 (setq idl-mode-hook '(lambda () (c-set-style "stroustrup")))
