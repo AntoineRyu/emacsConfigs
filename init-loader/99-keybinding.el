@@ -12,7 +12,7 @@
 ;; anzu
 (global-set-key (kbd "M-%")   'anzu-query-replace)
 (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
-(global-set-key (kbd "C-c %") 'anzu-query-replace-at-cursor-thing)
+(global-set-key (kbd "C-%")   'anzu-query-replace-at-cursor-thing)
 
 ;; helm
 (global-set-key (kbd "C-?")  'helm-apropos)
