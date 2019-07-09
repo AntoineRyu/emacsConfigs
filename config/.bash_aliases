@@ -30,12 +30,12 @@ rsyncrobotbridge(){
 replaceantoine(){
     cd $MUJINJH_APPTEACHWORKER_HOME
     git cc antoine
-    git reset --hard origin/tw2019
+    git reset --hard "$1"
     git push origin HEAD -f
-    git submodule foreach --recursive git checkout antoine
-    git submodule foreach --recursive git reset --hard origin/tw2019
-    git submodule foreach --recursive git push origin HEAD -f
-    mujin_jhbuildcommon_advancesubmodules.bash antoine
+    git submodule update --init --recursive
+    git submodule foreach --recursive 'git push origin HEAD:antoine -f'
+    git submodule foreach --recursive 'git checkout antoine'
+    git submodule foreach --recursive 'git reset --hard origin/antoine'
 }
 
 diffbranches() {
