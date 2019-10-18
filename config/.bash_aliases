@@ -15,28 +15,35 @@ alias ui="mujin_teachworkerui_start.py --usermode dev"
 alias emax='emacs -Q -l ~/dotemacs/init.el'
 
 # Functions
-rsyncrobotbridge(){
-    if ! [[ "$1" =~ ^[0-9]+$ ]]; then
-        echo "Require to pass the number of a remote controller" 1>&2
-        return 1
+rsyncrepo(){
+    if [[ "$1" =~ ^[0-9]+$ ]]; then
+        REMOTE="c+controller"$1
+        echo "rsync to REMOTE="$REMOTE
+    elif [[ "$1" =~ ^\.[0-9]+$ ]]; then
+        REMOTE=172.17.0$1
+        echo "rsync to REMOTE="$REMOTE
+    else
+        REMOTE=$1
+        echo "rsync to REMOTE="$REMOTE
     fi
-
     path=$(pwd)
     cd $MUJINJH_APPTEACHWORKER_HOME/docker
-    make BUILD=release PRESET=ecs8xxx JOBS=4 jhbuild-run rsync BUILD_OPTS="--no-network" CMD="jhbuild buildone -n mujinrobotbridgescpp" REMOTE=c+controller"$1" MODULES=mujinrobotbridgescpp DEBUG=yes
+    make BUILD=release  PRESET=ecs8xxx JOBS=4 jhbuild-run rsync BUILD_OPTS="--no-network" CMD="jhbuild buildone -n "$2"" REMOTE=$REMOTE MODULES="$2" DEBUG=yes
     cd $path
 }
 
-replaceantoine(){
+# Don't forget to use origin/BRANCH for proper update.
+replacerepo(){
     cd $MUJINJH_APPTEACHWORKER_HOME
-    git cc antoine
-    git reset --hard origin/tw2019
+    git fetch
+    git checkout "$1"
+    git reset --hard "$2"
     git push origin HEAD -f
-    git submodule foreach --recursive git checkout antoine
-    git submodule foreach --recursive git reset --hard origin/tw2019
-    git submodule foreach --recursive git push origin HEAD -f
-    mujin_jhbuildcommon_advancesubmodules.bash antoine
+    git submodule foreach --recursive "git push origin HEAD:'$1' -f"
+    git submodule foreach --recursive "git checkout '$1'"
+    git submodule foreach --recursive "git reset --hard origin/'$1'"
 }
+
 
 diffbranches() {
     git checkout "$1"
