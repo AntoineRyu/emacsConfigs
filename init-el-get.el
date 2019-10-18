@@ -6,6 +6,8 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+
 (custom-set-variables
  '(el-get-verbose t))
 
@@ -96,4 +98,14 @@
 ;; misc
 (el-get-bundle open-junk-file)
 
+;; flycheck
 (el-get-bundle flycheck)
+
+;; lsp
+(el-get-bundle lsp-mode)
+(el-get-bundle lsp-ui)
+(el-get-bundle company-lsp)
+(el-get-bundle lsp-python-ms
+  :url "https://github.com/emacs-lsp/lsp-python-ms.git")
+
+(el-get 'sync)

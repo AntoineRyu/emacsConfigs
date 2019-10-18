@@ -17,4 +17,4 @@ sudo ./setup.py install --record=install-files.txt
 cp $HOME/emacsConfigs/config/.bash_aliases $HOME
 cp $HOME/emacsConfigs/config/.gitconfig $HOME
 cp $HOME/emacsConfigs/config/flake8 $HOME/.config
-# Terminator configs?
+# Terminator configs? -> for shift+ctrl+alt+a bug
