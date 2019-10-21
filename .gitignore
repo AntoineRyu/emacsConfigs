@@ -3,10 +3,10 @@ elpa/*
 el-get/*
 session.*
 *~
-#*#
 history
 ac-comphist.dat
 smex-items
 ido.last
 places
 recentf
+el-get.lock
