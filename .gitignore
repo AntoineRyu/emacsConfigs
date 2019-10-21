@@ -3,7 +3,7 @@ elpa/*
 el-get/*
 session.*
 *~
-#*#
+\#*#
 history
 ac-comphist.dat
 smex-items
@@ -13,3 +13,5 @@ recentf
 el-get.lock
 .lsp-session*
 .python-environments
+network-security.data
+.\#*
