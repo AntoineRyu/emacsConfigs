@@ -37,13 +37,24 @@ replacerepo(){
     cd $MUJINJH_APPTEACHWORKER_HOME
     git fetch
     git checkout "$1"
-    git reset --hard "$2"
+    git reset --hard origin/"$2"
     git push origin HEAD -f
     git submodule foreach --recursive "git push origin HEAD:'$1' -f"
     git submodule foreach --recursive "git checkout '$1'"
     git submodule foreach --recursive "git reset --hard origin/'$1'"
 }
 
+advancerepo(){
+    git submodule foreach --recursive "git checkout '$1'"
+    git submodule foreach --recursive "git reset --hard origin/'$1'"
+    branch_name=$(git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3)
+    git branch --set-upstream-to=origin/$branch_name $branch_name
+    mujin_jhbuildcommon_advancemodule.bash "$1" # might fail due to branch not set upstream
+    path=$(pwd)
+    cd $MUJINJH_APPTEACHWORKER_HOME
+    mujin_jhbuildcommon_advancesubmodules.bash "$1"
+    cd $path
+}
 
 diffbranches() {
     git checkout "$1"
