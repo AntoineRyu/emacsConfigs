@@ -48,8 +48,10 @@ _jhbuild_complete()
 rsyncrepo(){
     if [ $# -eq 0 ]; then
         echo "Usage: rsyncrepo TARGET_ADDRESS JHBUILD_REPO"
+        return
     elif [ $# -eq 1 ]; then
         echo "Please provide a jhbuild repository to rsync to"
+        return
     fi
     
     if [[ "$1" =~ ^[0-9]+$ ]]; then
@@ -73,8 +75,10 @@ complete -F _jhbuild_complete rsyncrepo
 replacerepo(){
     if [ $# -eq 0 ]; then
         echo "Usage: replacerepo REPLACE_REPO WITH_THIS_REPO"
+        return
     elif [ $# -eq 1 ]; then
         echo "Please provide a target repository to copy"
+        return
     fi
     
     cd $MUJINJH_APPTEACHWORKER_HOME
