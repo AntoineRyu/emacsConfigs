@@ -16,7 +16,7 @@
 (el-get-lock)
 
 ;; setup
-(el-get-bundle emacs-jp/init-loader)
+(el-get-bundle emacs-jp/init-loader) ;; For diagnostics of load time
 (el-get-bundle purcell/exec-path-from-shell)
 
 ;; appearance
@@ -54,7 +54,7 @@
 (el-get-bundle helm-swoop)
 
 ;; tab
-(el-get-bundle tabbar)
+;(el-get-bundle tabbar)
 
 ;; tag
 ;; (el-get-bundle rtags)
@@ -67,18 +67,18 @@
 (el-get-bundle tkf/emacs-python-environment)
 (el-get-bundle elpa:jedi-core)
 (el-get-bundle epc)
-(el-get-bundle jedi)
-(el-get-bundle syohex/emacs-company-jedi :name company-jedi)
+;(el-get-bundle jedi)
+;(el-get-bundle syohex/emacs-company-jedi :name company-jedi)
 
 ;; matlab
-(el-get-bundle ruediger/matlab-emacs :name matlab-mode) ; default recipe uses cvs, which does not work behind proxy
+;(el-get-bundle ruediger/matlab-emacs :name matlab-mode) ; default recipe uses cvs, which does not work behind proxy
 
 ;; Build tool
 (el-get-bundle cmake-mode)
 
 ;; Markup language
 (el-get-bundle markdown-mode)
-(el-get-bundle yoshiki/yaml-mode)
+;(el-get-bundle yoshiki/yaml-mode)
 (el-get-bundle cataska/qml-mode)
 
 ;; VCS
@@ -90,7 +90,7 @@
 (el-get-bundle smex)
 
 ;; snippet
-(el-get-bundle emacs-jp/helm-c-yasnippet)
+;(el-get-bundle emacs-jp/helm-c-yasnippet)
 
 ;; Japanese
 (el-get-bundle mozc)
