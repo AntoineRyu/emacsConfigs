@@ -94,5 +94,7 @@
 ;(global-set-key [f12]    'bm-next)
 ;(global-set-key [S-f12]  'bm-previous)
 
-(require 'bind-key)
-(bind-key* "C-M-i" 'scroll-up-in-place)
+;(require 'bind-key)
+;(bind-key* "C-M-i" 'scroll-up-in-place)
+
+(remove-hook 'post-command-hook   'magit-blame-goto-chunk-hook t)

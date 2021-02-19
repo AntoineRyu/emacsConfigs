@@ -1,9 +1,8 @@
 (setq inhibit-startup-screen t)
 
-(when window-system
-  (menu-bar-mode -1) ; メニューバーを消す
-  (tool-bar-mode -1) ; ツールバーを消す
-)
+
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(menu-bar-lines . 0) default-frame-alist)
 
 (require 'generic-x)
 ;(windmove-default-keybindings)          ; Shift + 矢印キー でウィンドウ間移動

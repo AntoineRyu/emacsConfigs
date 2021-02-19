@@ -1,4 +1,4 @@
-(setq save-place t)
+(save-place-mode 1) ;;(setq save-place t)
 (recentf-mode t)
 (setq compilation-scroll-output t)
 (setq kill-whole-line t)

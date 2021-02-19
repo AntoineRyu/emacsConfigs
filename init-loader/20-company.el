@@ -12,10 +12,10 @@
 (global-company-mode t)
 (global-auto-complete-mode nil)
 
-(eval-after-load 'company
-  '(progn
-     (define-key company-mode-map [C-SPC] 'helm-company)
-     (define-key company-active-map [C-SPC] 'helm-company)))
+;; (eval-after-load 'company
+;;   '(progn
+;;      (define-key company-mode-map [C-SPC] 'helm-company)
+;;      (define-key company-active-map [C-SPC] 'helm-company)))
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -25,4 +25,4 @@
 (add-to-list 'company-backends 'company-rtags)
 (setq company-rtags-begin-after-member-access t)
 (setq rtags-completions-enabled t)
-(rtags-diagnostics)
+;;(rtags-diagnostics)
