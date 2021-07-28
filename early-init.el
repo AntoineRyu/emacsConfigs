@@ -1,4 +1,4 @@
-;(package-initialize)
+;;; early-init.el ---                                -*- lexical-binding: t; -*-
 
 ;; Speed up initialization. Suggestions taken from Doom emacs configs.
 (setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
@@ -19,14 +19,18 @@
   (lambda ()
     (setq file-name-handler-alist custom--file-name-handler-alist)))
 
-(unless load-file-name
-  (cd (getenv "HOME")))
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars . 0) default-frame-alist)
+(push '(horizontal-scroll-bars. 0) default-frame-alist)
 
-;(require 'cl-lib)
+;; (when load-file-name
+;;  (setq-default user-emacs-directory (file-name-directory load-file-name)))
 
-(when load-file-name
-  (setq-default user-emacs-directory (file-name-directory load-file-name)))
-
-(setq load-prefer-newer noninteractive)
+;; Always load newest byte code
+(setq load-prefer-newer t)
 
 (setq initial-scratch-message "")
+
+(provide 'early-init)
+;;; early-init.el ends here

@@ -1,10 +1,26 @@
-(load (concat user-emacs-directory "init-el-get.el"))
-
 ;; (emacs-init-time)
-;; time emacs --eval '(kill-emacs)' ;; Use this line in terminal to evaluate load time quickly
 
-;; init-loader
-(custom-set-variables
- '(init-loader-show-log-after-init 'error-only))
-(init-loader-load (concat user-emacs-directory "init-loader"))
 
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(load (concat (file-name-directory load-file-name)
+              "core/core-load-paths.el")
+      nil (not init-file-debug))
+
+(require 'core-packages)
+(require 'core-editor)
+(require 'core-ui)
+(require 'core-git)
+(require 'core-helm)
+(require 'core-company)
+(require 'core-python)
+(require 'core-flycheck)
+(require 'core-lsp)
+(require 'core-hydra)
+(require 'core-docker)
+
+(provide 'init)
