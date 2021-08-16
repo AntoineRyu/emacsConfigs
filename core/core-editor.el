@@ -298,6 +298,12 @@ _h_ ^+^ _l_ |
   :custom
   (bm-buffer-persistence nil "Do not save bookmarks"))
 
+;; goto-last-change
+(use-package goto-chg
+  :bind
+  (("<M-up>"   . goto-last-change)
+   ("<M-down>" . goto-last-change-reverse)))
+
 (require 'core-auto-complete)
 (require 'core-align-text)
 (provide 'core-editor)

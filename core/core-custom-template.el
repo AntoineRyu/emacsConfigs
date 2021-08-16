@@ -68,11 +68,6 @@
 
 ;(global-set-key (kbd "C-SPC") 'company-complete)
 
-;; navigation inside window
-(global-set-key [M-up]    'goto-last-change)
-(global-set-key [M-down]  'goto-last-change-reverse)
-(global-set-key (kbd "M-,") 'avy-goto-char-2)
-
 ;; git-gutter
 ;;(global-set-key [f1]     'git-gutter+-next-hunk)
 ;;(global-set-key [S-f1]   'git-gutter+-previous-hunk)
