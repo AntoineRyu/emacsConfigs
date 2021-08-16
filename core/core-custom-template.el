@@ -75,6 +75,7 @@
 ;; magit
 (global-set-key [f3]     'magit-diff)
 (global-set-key [C-f3]   'magit-status)
+(global-set-key [M-f3]   'magit-blame)
 
 ;; align
 (global-set-key [f4]     'align-current)
