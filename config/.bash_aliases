@@ -70,7 +70,7 @@ rsyncrepo(){
         echo "rsync to REMOTE="$REMOTE
     fi
     path=$(pwd)
-    cd $MUJINJH_APPTEACHWORKER_HOME/docker
+    cd $MUJINJH_APPCONTROLLER_HOME/docker
     make BUILD=release PRESET=ecs8xxx JOBS=4 jhbuild-run rsync BUILD_OPTS="--no-network" CMD="jhbuild buildone -n "$2"" REMOTE=$REMOTE MODULES="$2" DEBUG=yes
     cd $path
 }
@@ -85,8 +85,9 @@ replacerepo(){
         echo "Please provide a target repository to copy"
         return
     fi
-    
-    cd $MUJINJH_APPTEACHWORKER_HOME
+
+    path=$(pwd)
+    cd $MUJINJH_APPCONTROLLER_HOME
     git fetch
     git checkout "$1"
     git reset --hard origin/"$2"
@@ -95,30 +96,36 @@ replacerepo(){
     git submodule foreach --recursive "git push origin HEAD:'$1' -f"
     git submodule foreach --recursive "git checkout '$1'"
     git submodule foreach --recursive "git reset --hard origin/'$1'"
+    cd $path
+    if [ -f "/tmp/$2" ]; then
+       rm /tmp/$2
+    fi
 }
 complete -F _gitbranch_complete replacerepo
 
 advancerepo(){
+
+    path=$(pwd)
+
     git submodule foreach --recursive "git checkout '$1'"
     git submodule foreach --recursive "git reset --hard origin/'$1'"
     branch_name=$(git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3)
     git branch --set-upstream-to=origin/$branch_name $branch_name
     if mujin_jhbuildcommon_advancemodule.bash "$1"; then
-        path=$(pwd)
-        cd $MUJINJH_APPTEACHWORKER_HOME
+        echo "${path##*/}:$branch_name" >> /tmp/$1
+        cd $MUJINJH_APPCONTROLLER_HOME
         mujin_jhbuildcommon_advancesubmodules.bash "$1"
-        cd $path
     else
         # Retry
         git submodule foreach --recursive "git checkout '$1'"
         git submodule foreach --recursive "git reset --hard origin/'$1'"
         if mujin_jhbuildcommon_advancemodule.bash "$1"; then
-            path=$(pwd)
-            cd $MUJINJH_APPTEACHWORKER_HOME
+            echo "${path##*/}:$branch_name" >> /tmp/$1
+            cd $MUJINJH_APPCONTROLLER_HOME
             mujin_jhbuildcommon_advancesubmodules.bash "$1"
-            cd $path
         fi
-    fi
+    fi    
+    cd $path
 }
 complete -F _gitbranch_complete advancerepo
 
