@@ -1,20 +1,21 @@
 #!/bin/bash
-# for emacs, terminator and other non mujin stuff
 
-sudo apt-get install gitk silversearcher-ag bzr
+sudo apt-get install gitk silversearcher-ag
 sudo apt-get install texinfo virtualenv
-#sudo pip install
 
-# My emacs setup
-git clone https://github.com/AntoineRyu/emacsConfigs.git $HOME/emacsConfigs
+# fzf - Command line fuzzy finder
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --completion --key-bindings --update-rc
 
-# Terminator from source
-bzr branch lp:terminator $HOME/terminator
+# Terminator - terminal
+git clone https://github.com/gnome-terminator/terminator.git $HOME/terminator
 cd $HOME/terminator
-sudo ./setup.py install --record=install-files.txt
+python3 setup.py build
+python3 setup.py install --single-version-externally-managed --record=install-files.txt
 
 # Copy configs
-cp $HOME/emacsConfigs/config/.bash_aliases $HOME
-cp $HOME/emacsConfigs/config/.gitconfig $HOME
-cp $HOME/emacsConfigs/config/flake8 $HOME/.config
-# Terminator configs? -> for shift+ctrl+alt+a bug
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+cp $SCRIPTPATH/.bash_aliases $HOME
+cp $SCRIPTPATH/.gitconfig $HOME
+cp $SCRIPTPATH/flake8 $HOME/.config
+cp $SCRIPTPATH/gitk $HOME/.config/git/
