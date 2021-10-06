@@ -165,8 +165,6 @@
   (which-key-separator " ")
   (which-key-prefix-prefix "+"))
 
-
-
 ;; TABBAR
 (use-package tabbar
   :ensure t)
@@ -200,6 +198,9 @@
                ((eq major-mode 'dired-mode) "emacs")
                (t "user"))))
  (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
+
+(global-set-key (kbd "C-<tab>") 'tabbar-forward-tab)
+(global-set-key (kbd "C-S-<iso-lefttab>") 'tabbar-backward-tab)
 
 (tabbar-mode 1)
 

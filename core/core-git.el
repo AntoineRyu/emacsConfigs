@@ -9,8 +9,12 @@
   (magit-display-buffer-function 'magit-display-buffer-fullcolumn-most-v1)
   (magit-diff-refine-hunk t "Show fine differences for the current diff hunk only.")
   :bind
-  (("C-x g" . magit-status)
+  (("<f3>" . magit-diff)
+   ("<C-f3>" . magit-status)
+   ("<M-f3>" . magit-blame)
    ("s-m" . magit-file-dispatch)))
+
+(remove-hook 'post-command-hook   'magit-blame-goto-chunk-hook t)
 
 (use-package gitattributes-mode
   :defer t)
@@ -22,6 +26,10 @@
   :defer t)
 
 (use-package diff-hl
+  :bind
+  (("<f1>" . diff-hl-next-hunk)
+   ("<S-f1>" . diff-hl-previous-hunk)
+   ("<C-f1>" . diff-hl-show-hunk))
   :diminish
   :hook
   ((after-init . global-diff-hl-mode)

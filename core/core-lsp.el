@@ -66,5 +66,7 @@
   :after lsp
   :commands lsp-treemacs-errors-list)
 
+(global-set-key [f5]     'lsp-find-definition)
+
 (provide 'core-lsp)
 ;;; core-lsp.el ends here

@@ -60,7 +60,8 @@
 ;; Core package anzu better search and replace
 (use-package anzu
   :diminish anzu-mode
-  :bind (([remap query-replace] . anzu-query-replace)
+  :bind (("C-%" . anzu-query-replace-at-cursor-thing)
+         ([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map
          ([remap isearch-query-replace] . anzu-isearch-query-replace)
@@ -224,26 +225,11 @@ if `n' is 9, return root dir + repo path."
   ("M-7" . winum-select-window-7)
   ("M-8" . winum-select-window-8))
 
-;; Avy. Jump to anywhere like a sniper
-(use-package avy
-  :ensure t
-  :bind
-  ("C-c j" . avy-goto-word-or-subword-1)
-  :config
-  (avy-setup-default)
-  :custom
-  (avy-background t))
-
 ;; Ace window. specify which window to jump to
 (use-package ace-window
   :bind
   ("s-w" . ace-window)
   ([remap other-window] . ace-window))
-
-(use-package move-text
-  :bind
-  ("M-S-<up>" . move-text-up)
-  ("M-S-<down>" . move-text-down))
 
 (use-package multiple-cursors
   :diminish

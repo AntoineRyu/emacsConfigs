@@ -4,14 +4,19 @@
   :bind
   (("M-x" . helm-M-x)
    ("C-x C-f" . helm-find-files)
+   ("C-o" . helm-find-files)
    ("C-x f" . helm-recentf)
    ("s-r". helm-recentf)
    ("M-y" . helm-show-kill-ring)
    ("C-x b" . helm-buffers-list)
+   ("C-;" . helm-for-files)
+   ("C-'" . helm-mini)
+   ("C-." . helm-do-ag-project-root)
+   ("C-]" . helm-resume)
+   ("C-z" . helm-occur)
    :map helm-map
    ("TAB" . helm-execute-persistent-action)
-   ("C-i" . helm-execute-persistent-action)
-   ("C-z" . helm-select-action))
+   ("C-i" . helm-execute-persistent-action))
   :custom
   (helm-buffers-fuzzy-matching t)
   (helm-prevent-escaping-from-minibuffer t)

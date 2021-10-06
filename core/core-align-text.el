@@ -73,5 +73,7 @@ Align text
     ("\\" core/align-repeat-backslash)
     ("\." core/align-repeat-period)))
 
+(global-set-key [f4]     'align-current)
+
 (provide 'core-align-text)
 ;;; core-align-text.el ends here
