@@ -55,23 +55,53 @@ rsyncrepo(){
         echo "Usage: rsyncrepo TARGET_ADDRESS JHBUILD_REPO"
         return
     elif [ $# -eq 1 ]; then
-        echo "Please provide a jhbuild repository to rsync to"
+        echo "Please provide a jhbuild repository to rsync to or use one of the following quick options:"
+        echo "  1 - mujinrobotbridgescpp"
+        echo "  2 - openrave"
+        echo "  3 - ikfactpp"
+        echo "  4 - mujinplanningcommoncpp"
+        echo "  5 - mujincontrollercommoncpp"
+
+        read MODULE
+    else
+        MODULE=$2
+    fi
+
+    if [ "$MODULE" == 1 ]; then
+       MODULE="mujinrobotbridgescpp"
+    elif [ "$MODULE" == 2 ]; then
+        MODULE="openrave"
+    elif [ "$MODULE" == 3 ]; then
+        MODULE="ikfastcpp"
+    elif [ "$MODULE" == 4 ]; then
+        MODULE="mujinplanningcommoncpp"
+    elif [ "$MODULE" == 5 ]; then
+        MODULE="mujincontrollercommoncpp"
+    else
+        echo "Failed to recognize module "$MODULE
         return
     fi
-    
+
+    SEND_DEBUG=${3:-yes}
+    if [[ "$SEND_DEBUG" =~ ^(?:yes\b|no\b) ]]; then
+       echo "DEBUG argument not supported: \""$SEND_DEBUG"\" overwritting with \"no\""
+       SEND_DEBUG="no"
+    fi
+       
     if [[ "$1" =~ ^[0-9]+$ ]]; then
         REMOTE="c+controller"$1
-        echo "rsync to REMOTE="$REMOTE
+    elif [[ "$1" =~ ^gw[0-9]+$ ]]; then
+        REMOTE="c+gw+controller"${1:2}
     elif [[ "$1" =~ ^\.[0-9]+$ ]]; then
         REMOTE=172.17.0$1
-        echo "rsync to REMOTE="$REMOTE
     else
         REMOTE=$1
-        echo "rsync to REMOTE="$REMOTE
     fi
+    echo "rsync \""$MODULE"\" to \""$REMOTE"\" DEBUG="$SEND_DEBUG
+
     path=$(pwd)
     cd $MUJINJH_APPCONTROLLER_HOME/docker
-    make BUILD=release PRESET=ecs8xxx JOBS=4 jhbuild-run rsync BUILD_OPTS="--no-network" CMD="jhbuild buildone -n "$2"" REMOTE=$REMOTE MODULES="$2" DEBUG=yes
+    make BUILD=release PRESET=ecs8xxx JOBS=4 jhbuild-run rsync BUILD_OPTS="--no-network" CMD="jhbuild buildone -n "$MODULE"" REMOTE=$REMOTE MODULES="$MODULE" DEBUG="$SEND_DEBUG"
     cd $path
 }
 complete -F _jhbuild_complete rsyncrepo
