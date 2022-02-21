@@ -16,4 +16,4 @@
 	dd = diff
 	st = stash
 	sts = "!git stash show -p stash@{\"$1\"} #"
-	
+	set-upstream="!git branch --set-upstream-to=origin/\"$(git rev-parse --abbrev-ref HEAD)\""
