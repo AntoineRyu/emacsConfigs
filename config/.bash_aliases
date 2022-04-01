@@ -7,6 +7,7 @@ alias ll='ls -lart'
 #alias remacs='emacs -Q -l ~/emacsConfigs/init.el'
 alias kk='kill -9 %'
 alias gka='gitk --all'
+alias fixmerge="emacs \`git diff --name-only --diff-filter=U\`"
 
 gkas(){
     gitk --all --select-commit="$1"
