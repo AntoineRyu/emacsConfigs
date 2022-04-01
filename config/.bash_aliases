@@ -96,9 +96,6 @@ rsyncrepo(){
         MODULE="mujinplanningcommoncpp"
     elif [ "$MODULE" == 5 ]; then
         MODULE="mujincontrollercommoncpp"
-    else
-        echo "Failed to recognize module "$MODULE
-        return
     fi
 
     SEND_DEBUG=${3:-yes}
