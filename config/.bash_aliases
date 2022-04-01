@@ -45,9 +45,27 @@ _jhbuild_complete()
 	done
 }
 
+# Commonly used checkoutroot directories autocomplete
+_checkoutroot_complete()
+{
+    commonDirList="planningcommon robotbridges itlprocess jhbuild"
+    COMPREPLY=($(compgen -W "$commonDirList" -- "$2"))
+}
+
 #########################
 ### Utility functions ###
 #########################
+
+# Quickly cd into checkoutroot common directories
+ccd (){
+    if [ "$1" == 'jhbuild' ]; then
+        path=/home/mujin/mujin/jhbuildappcontroller/docker
+    else
+        path=/home/mujin/mujin/checkoutroot/"$1"
+    fi
+    cd $path
+}
+complete -F _checkoutroot_complete ccd
 
 # jhbuild and rsync 
 rsyncrepo(){
