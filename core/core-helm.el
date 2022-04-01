@@ -89,5 +89,32 @@
   :custom-face
   (helm-rg-preview-line-highlight ((t (:inherit highlight :distant-foreground "black")))))
 
+(require 'helm-buffers)
+(defclass custom_helm-source-file-buffers (helm-source-buffers)
+((candidate-transformer :initform (lambda (buffers)
+                                   (cl-loop for buf in buffers
+                                            when (with-current-buffer
+                                                       buf buffer-file-name)
+                                            collect buf))))
+)
+
+(defclass custom_helm-source-nonfile-buffers (helm-source-buffers)
+((candidate-transformer :initform (lambda (buffers)
+                                   (cl-loop for buf in buffers
+                                            unless (with-current-buffer
+                                                       buf buffer-file-name)
+                                            collect buf))))
+)
+
+(setq custom_helm-source-file-buffers-list
+      (helm-make-source "File Buffers" 'custom_helm-source-file-buffers))
+(setq custom_helm-source-nonfile-buffers-list
+      (helm-make-source "Non-file Buffers" 'custom_helm-source-nonfile-buffers))
+
+(setq helm-mini-default-sources '(custom_helm-source-file-buffers-list
+                                  helm-source-recentf 
+                                  custom_helm-source-nonfile-buffers-list
+                                  helm-source-buffer-not-found))
+
 (provide 'core-helm)
 ;;; core-helm.el ends here
