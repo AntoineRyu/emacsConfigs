@@ -47,47 +47,28 @@
     (setq helm-swoop-split-window-function 'helm-default-display-buffer))
   :bind (:map isearch-mode-map
          ("M-i" . helm-swoop-from-isearch)))
-
+ 
 (use-package helm-ag
    :ensure helm-ag
    :init (setq helm-ag-insert-at-point 'symbol
                helm-ag-source-type 'file-line
 	       helm-ag-base-command "ag --nocolor --nogroup -i"))
 
-(use-package helm-projectile
-  :after (helm projectile)
-  :commands (helm-projectile-switch-to-buffer
-             helm-projectile-find-dir
-             helm-projectile-dired-find-dir
-             helm-projectile-recentf
-             helm-projectile-find-file
-             helm-projectile-grep
-             helm-projectile-ag
-             helm-projectile-rg
-             helm-projectile
-             helm-projectile-switch-project
-             core-helm-rg)
-  :init (helm-projectile-on)
-  :config
-  (defun core-helm-rg ()
-    "Run projectile-rg if in a project, otherwise rg current directory."
-    (interactive)
-    (if (projectile-project-p)
-      (helm-projectile-rg)
-      (helm-rg nil)))
-  :bind
-  (("C-<" . core-helm-rg)))
-
-(use-package helm-rg
-  :after (helm)
-  :bind
-  (:map helm-rg-map
-    ("M-b" . nil)
-    ("M-d" . nil)
-    ("M-i" . helm-rg--bounce)
-    ("M-o" . helm-rg--set-dir))
-  :custom-face
-  (helm-rg-preview-line-highlight ((t (:inherit highlight :distant-foreground "black")))))
+(defun helm-ag--do-ag-up-one-level ()
+  "Overwrite default helm-ag--do-ag-up-one-level to not ask for parent dir, losing it's helm-input."
+  (interactive)
+  (if (let ((parent (file-name-directory (directory-file-name default-directory)))
+            (initial-input helm-input))
+        (helm-run-after-exit
+         (lambda ()
+           (let ((default-directory parent)
+                 (helm-ag--default-directory parent))
+             (setq helm-ag--last-default-directory default-directory)
+             (helm-ag--do-ag-set-source default-directory)
+             (helm :sources 'helm-source-do-ag :buffer "*helm-ag*"
+                   :keymap helm-do-ag-map :input helm-input
+                   :history 'helm-ag--helm-history)))))
+    (message nil)))
 
 (require 'helm-buffers)
 (defclass custom_helm-source-file-buffers (helm-source-buffers)
