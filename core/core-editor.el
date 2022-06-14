@@ -194,6 +194,12 @@ if `n' is 9, return root dir + repo path."
         (easy-kill-adjust-candidate 'buffer-file-name text)))
     (advice-add 'easy-kill-on-buffer-file-name :after #'core/easy-kill-on-buffer-file-name)))
 
+;; Avoid C-k to copy to kill ring
+(defun kill-without-yank ()
+  (interactive)
+  (delete-region (point) (line-end-position)))
+(global-set-key (kbd "C-k") 'kill-without-yank)
+
 ;; Core package expand-region. Increase selected region by semantic units
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
