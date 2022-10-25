@@ -22,16 +22,8 @@
 ;; Indentation
 (setq-default indent-tabs-mode nil)
 (setq-default c-basic-offset 4)
+(setq-default c-indent-level 4)
 (setq-default tab-width 4)
-
-(defun my-c++-mode-hook ()
-  (setq tab-width 4)
-  (setq c-indent-level 4)
-)
-(defun my-c-mode-hook ()
-  (setq tab-width 4)
-  (setq c-indent-level 4)
-)
 
 ;; Newline at end of file
 (setq require-final-newline t)
