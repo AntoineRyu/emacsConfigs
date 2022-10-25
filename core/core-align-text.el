@@ -74,6 +74,7 @@ Align text
     ("\." core/align-repeat-period)))
 
 (global-set-key [f4]     'align-current)
+(global-set-key [C-f4]   'align-regexp)
 
 (provide 'core-align-text)
 ;;; core-align-text.el ends here

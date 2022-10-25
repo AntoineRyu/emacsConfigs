@@ -61,6 +61,8 @@
 (use-package anzu
   :diminish anzu-mode
   :bind (("C-%" . anzu-query-replace-at-cursor-thing)
+         ("M-%" . anzu-query-replace)
+         ("C-M-%" . anzu-query-replace-regexp)
          ([remap query-replace] . anzu-query-replace)
          ([remap query-replace-regexp] . anzu-query-replace-regexp)
          :map isearch-mode-map

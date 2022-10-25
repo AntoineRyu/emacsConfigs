@@ -32,11 +32,13 @@
  '(hl-paren-face ((nil (:weight ultra-bold))) t))
 
 
-
 ;; window operation
 (global-set-key (kbd "C-t")  'other-window); overwrite transpose-chars
-(global-set-key (kbd "C-\+") 'other-window-or-split)
-(global-set-key (kbd "C-\-") 'delete-other-windows)
+
+;; navigation inside window
+(global-set-key (kbd "M-,") 'avy-goto-char-2)
+
+;; (global-set-key [f5]     'helm-imenu)
 
 ;; Ask before killing emacs
 (setq confirm-kill-emacs 'y-or-n-p)
