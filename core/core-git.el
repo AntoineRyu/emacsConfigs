@@ -15,16 +15,10 @@
    ("s-m" . magit-file-dispatch)))
 
 (remove-hook 'post-command-hook   'magit-blame-goto-chunk-hook t)
-
-(use-package gitattributes-mode
+"
+(use-package git-modes
   :defer t)
-
-(use-package gitconfig-mode
-  :defer t)
-
-(use-package gitignore-mode
-  :defer t)
-
+"
 (use-package diff-hl
   :bind
   (("<f1>" . diff-hl-next-hunk)
