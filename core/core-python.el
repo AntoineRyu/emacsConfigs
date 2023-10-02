@@ -27,18 +27,20 @@ Argument ARG is ignored."
   :hook
   (python-mode . core/python-setup-hs-mode))
 
-;; Format using YAPF
 ;; Install:
 ;; pip install black
 ;; pip install black-macchiato
 (use-package python-black
   :demand t
   :after python
-  :custom
-  (python-black-extra-args '("--line-length=120" "--skip-string-normalization"))
-  :bind
-  (:map python-mode-map
-    ("C-c C-l" . python-black-partial-dwim)))
+  :hook (python-mode . python-black-on-save-mode))
+
+;; Install:
+;; pip install isort
+(use-package python-isort
+  :demand t
+  :after python
+  :hook (python-mode . python-isort-on-save-mode))
 
 (use-package sphinx-doc
   :hook (python-mode . sphinx-doc-mode))
