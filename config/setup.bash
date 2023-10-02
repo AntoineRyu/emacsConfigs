@@ -19,4 +19,5 @@ SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 cp $SCRIPTPATH/.bash_aliases $HOME
 cp $SCRIPTPATH/.gitconfig $HOME
 cp $SCRIPTPATH/flake8 $HOME/.config
+cp $SCRIPTPATH/setup.cfg $HOME/.config
 cp $SCRIPTPATH/gitk $HOME/.config/git/
