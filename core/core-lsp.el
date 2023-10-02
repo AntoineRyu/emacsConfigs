@@ -21,6 +21,7 @@
 
 (use-package lsp-python-ms
   :defer t
+  :init (setq lsp-python-ms-auto-install-server t)
   :custom
   (lsp-python-ms-cache-dir (concat core-cache-directory ".lsp-python")))
 
@@ -29,7 +30,6 @@
   :commands (lsp lsp-deferred)
   :hook
   ((python-mode . core-lsp-setup-python)
-   (js-mode . core-lsp-setup-js)
    ((sh-mode c-mode c++-mode
       html-mode web-mode json-mode
       css-mode less-mode sass-mode scss-mode
@@ -58,6 +58,10 @@
   (lsp-ui-sideline-enable nil "Hide sideline")
   (lsp-ui-doc-enable nil "Disable lsp doc for now as size is not property handled ")
   (lsp-ui-peek-always-show t "Show peek even only one matching"))
+
+(use-package helm-lsp
+  :after lsp
+  :commands helm-lsp-workspace-symbol)
 
 (use-package lsp-treemacs
   :after lsp

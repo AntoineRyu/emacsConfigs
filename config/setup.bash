@@ -2,6 +2,7 @@
 
 sudo apt-get install gitk silversearcher-ag
 sudo apt-get install texinfo virtualenv
+pip install python-lsp-server
 
 # fzf - Command line fuzzy finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
