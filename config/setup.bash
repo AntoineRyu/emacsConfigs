@@ -21,3 +21,4 @@ cp $SCRIPTPATH/.gitconfig $HOME
 cp $SCRIPTPATH/flake8 $HOME/.config
 cp $SCRIPTPATH/setup.cfg $HOME/.config
 cp $SCRIPTPATH/gitk $HOME/.config/git/
+cp $SCRIPTPATH/ssh_config $HOME/.ssh/config
