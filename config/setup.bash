@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install gitk silversearcher-ag
+sudo apt-get install gitk silversearcher-ag libterm-readkey-perl git-lfs
 sudo apt-get install texinfo virtualenv
 pip install python-lsp-server black black-macchiato isort
 

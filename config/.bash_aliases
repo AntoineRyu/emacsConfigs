@@ -63,6 +63,79 @@ _remote_bootstrap_shell()
     return 0
 }
 
+_test_autocomplete() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    
+    # Set the base directory path relative to the home directory
+    base_path="/home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/ros2/nodes/simulation_tests/simulation_tests"
+
+    # List all test_*.py files in the base path
+    opts=$(find "$base_path" -name 'test_*' ! -name "*.pyc" -exec basename {} \;)
+
+    COMPREPLY=( $(compgen -W "$opts" -- "$cur") )
+    return 0
+}
+
+# Generic any path autocompleter
+_complete_specific_path() {
+  # declare variables
+  local _item _COMPREPLY _old_pwd
+
+  # if we already are in the completed directory, skip this part
+  if [ "${PWD}" != "$1" ]; then
+    _old_pwd="${PWD}"
+    # magic here: go the specific directory!
+    pushd "$1" &>/dev/null || return
+
+    # init completion and run _filedir inside specific directory
+    _init_completion -s || return
+    _filedir
+
+    # iterate on original replies
+    for _item in "${COMPREPLY[@]}"; do
+      # this check seems complicated, but it handles the case
+      # where you have files/dirs of the same name
+      # in the current directory and in the completed one:
+      # we want only one "/" appended
+      if [ -d "${_item}" ] && [[ "${_item}" != */ ]] && [ ! -d "${_old_pwd}/${_item}" ]; then
+        # append a slash if directory
+        _COMPREPLY+=("${_item}/")
+      else
+        _COMPREPLY+=("${_item}")
+      fi
+    done
+
+    # popd as early as possible
+    popd &>/dev/null
+
+    # if only one reply and it is a directory, don't append a space
+    # (don't know why we must check for length == 2 though)
+    if [ ${#_COMPREPLY[@]} -eq 2 ]; then
+      if [[ "${_COMPREPLY}" == */ ]]; then
+        compopt -o nospace
+      fi
+    fi
+
+    # set the values in the right COMPREPLY variable
+    COMPREPLY=( "${_COMPREPLY[@]}" )
+
+    # clean up
+    unset _COMPREPLY
+    unset _item
+  else
+    # we already are in the completed directory, easy
+    _init_completion -s || return
+    _filedir
+  fi
+}
+
+_complete_test_path() {
+  _complete_specific_path /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/ros2/nodes/simulation_tests/simulation_tests
+}
+
 #########################
 ### Utility functions ###
 #########################
@@ -219,3 +292,21 @@ shell(){
     fi
 }
 complete -F _remote_bootstrap_shell shell
+
+
+
+fullpathsearchsimtest() {
+    /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/scripts/run-simulator-tests.py ~/checkoutroot/tsl_simulator/ /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/ros2/nodes/simulation_tests/simulation_tests/"$@"
+}
+complete -o nospace -F _complete_test_path fullpathsearchsimtest
+
+simtest() {
+    base_path="/home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/ros2/nodes/simulation_tests/simulation_tests"
+    opts=$(find "$base_path" -name "$1")
+    shift
+    if [[ $opts == *multi* ]]; then
+       opts+=" --multi-robot"
+    fi
+    /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/scripts/run-simulator-tests.py ~/checkoutroot/tsl_simulator/ $opts "$@"
+}
+complete -o nospace -F _test_autocomplete simtest

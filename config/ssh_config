@@ -1,5 +1,5 @@
 Host emock robot_*
-    User administrator  
+    User administrator
 
 Host emock
     HostName 172.18.44.86
@@ -21,3 +21,19 @@ Host robot_4s-1
 
 Host robot_4s-2
     HostName s-palette-4s-2.robotics.internal.woven.tech
+
+Host robot_4s-4
+    HostName s-palette-4s-4.robotics.internal.woven.tech
+
+Host robot_5s-2
+    HostName s-palette-5s-2-intel.robotics.internal.woven.tech
+
+Host test_runner
+    User tanishige
+    HostName 172.18.44.65
+
+Host emu.github.com
+  HostName github.com
+  User git
+  IdentityFile /home/antoine-rioux/.ssh/id_rsa_emu
+  IdentitiesOnly yes
