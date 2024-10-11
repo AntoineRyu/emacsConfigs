@@ -22,7 +22,8 @@
  '(highlight-parentheses-delay 0.2 nil nil "delay of parentheses highlight")
  '(highlight-parentheses-highlight-adjacent t nil nil "like show-paren-mode")
  '(package-selected-packages
-   '(helm-ag docker docker-compose-mode dockerfile-mode lsp-treemacs lsp-ui lsp-python-ms flycheck-pos-tip flycheck po-mode qml-mode cmake-mode go-mode swift-mode yaml-mode markdown-mode parinfer-rust-mode graphql-mode web-mode typescript-mode json-mode prettier-js pytest sphinx-doc python-black company-prescient company helm-rg helm-projectile helm diff-hl git-modes magit which-key rainbow-mode symbol-overlay volatile-highlights hl-todo highlight-numbers rainbow-delimiters highlight-parentheses dashboard doom-modeline doom-themes tree-sitter-langs bm quickrun editorconfig crux multiple-cursors ace-window winum expand-region easy-kill copy-as-format comment-dwim-2 undo-tree projectile swiper anzu hydra auto-package-update use-package))
+   '(cargo-mode cargo rust-mode toml-mode helm-lsp python-isort all-the-icons helm-ag docker docker-compose-mode dockerfile-mode lsp-treemacs lsp-ui lsp-python-ms flycheck-pos-tip flycheck po-mode qml-mode cmake-mode go-mode swift-mode yaml-mode markdown-mode parinfer-rust-mode graphql-mode web-mode typescript-mode json-mode prettier-js pytest sphinx-doc python-black company-prescient company helm-rg helm-projectile helm diff-hl git-modes magit which-key rainbow-mode symbol-overlay volatile-highlights hl-todo highlight-numbers rainbow-delimiters highlight-parentheses dashboard doom-modeline doom-themes tree-sitter-langs bm quickrun editorconfig crux multiple-cursors ace-window winum expand-region easy-kill copy-as-format comment-dwim-2 undo-tree projectile swiper anzu hydra auto-package-update use-package))
+ '(projectile-enable-caching t)
  '(warning-suppress-types '((comp) (comp) (comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -30,7 +31,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-rg-preview-line-highlight ((t (:inherit highlight :distant-foreground "black"))))
- '(hl-paren-face ((nil (:weight ultra-bold))) t))
+ '(hl-paren-face ((nil (:weight ultra-bold))) t)
+ '(completions-group-title ((t (:foreground "goldenrod3")))))
 
 
 ;; window operation
