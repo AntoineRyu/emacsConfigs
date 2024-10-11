@@ -4,13 +4,9 @@
   (require 'core-load-paths))
 
 (use-package magit
-  :custom
-  (magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
-  (magit-display-buffer-function 'magit-display-buffer-fullcolumn-most-v1)
-  (magit-diff-refine-hunk t "Show fine differences for the current diff hunk only.")
   :bind
-  (("<f3>" . magit-diff)
-   ("<C-f3>" . magit-status)
+  (("<f3>" . magit-status)
+   ("<C-f3>" . magit-diff)
    ("<M-f3>" . magit-blame)
    ("s-m" . magit-file-dispatch)))
 

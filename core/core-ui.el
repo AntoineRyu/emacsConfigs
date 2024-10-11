@@ -34,7 +34,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; highlight the current line
-(global-hl-line-mode t)
+;; (global-hl-line-mode t)
 
 ;; Initial size to be full screen height, half screen width and in the middle
 ;; (when (display-graphic-p)
@@ -69,16 +69,16 @@
   :config
   (load-theme 'monokai t))
 
-(use-package doom-modeline
-  :config
-  (doom-modeline-def-modeline 'doom-core
-    '(bar workspace-name window-number modals matches buffer-info remote-host buffer-position word-count parrot selection-info)
-    '(objed-state misc-info persp-name grip gnus debug lsp minor-modes input-method indent-info buffer-encoding major-mode vcs checker))
-  (defun core-doom-modeline ()
-    "Setup custom doom modeline."
-    (doom-modeline-set-modeline 'doom-core 'default))
-  :hook ((after-init . doom-modeline-mode)
-         (doom-modeline-mode . core-doom-modeline)))
+;; (use-package doom-modeline
+;;   :config
+;;   (doom-modeline-def-modeline 'doom-core
+;;     '(bar workspace-name window-number modals matches buffer-info remote-host buffer-position word-count parrot selection-info)
+;;     '(objed-state misc-info persp-name grip gnus debug lsp minor-modes input-method indent-info buffer-encoding major-mode vcs checker))
+;;   (defun core-doom-modeline ()
+;;     "Setup custom doom modeline."
+;;     (doom-modeline-set-modeline 'doom-core 'default))
+;;   :hook ((after-init . doom-modeline-mode)
+;;          (doom-modeline-mode . core-doom-modeline)))
 
 (use-package all-the-icons
   :if (display-graphic-p)
