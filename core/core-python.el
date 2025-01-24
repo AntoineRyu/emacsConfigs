@@ -28,19 +28,15 @@ Argument ARG is ignored."
   (python-mode . core/python-setup-hs-mode))
 
 ;; Install:
-;; pip install black
-;; pip install black-macchiato
-(use-package python-black
-  :demand t
-  :after python
-  :hook (python-mode . python-black-on-save-mode))
-
-;; Install:
-;; pip install isort
-(use-package python-isort
-  :demand t
-  :after python
-  :hook (python-mode . python-isort-on-save-mode))
+;; pip install ruff
+(use-package reformatter
+  :hook
+  (python-mode . ruff-format-on-save-mode)
+  (python-ts-mode . ruff-format-on-save-mode)
+  :config
+  (reformatter-define ruff-format
+    :program "ruff"
+    :args `("format" "--stdin-filename" ,buffer-file-name "-")))
 
 (use-package sphinx-doc
   :hook (python-mode . sphinx-doc-mode))
