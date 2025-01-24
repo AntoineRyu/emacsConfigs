@@ -21,8 +21,8 @@
 
 ;; Indentation
 (setq-default indent-tabs-mode nil)
-(setq-default c-basic-offset 4)
-(setq-default c-indent-level 4)
+(setq-default c-basic-offset 2)
+(setq-default c-indent-level 2)
 (setq-default tab-width 4)
 
 ;; Newline at end of file
