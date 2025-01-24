@@ -51,7 +51,7 @@
          ;; Other custom bindings
          ("s-r" . consult-recent-file)
          ("M-y" . consult-yank-pop)
-         ("C-." . fate/consult-rg)
+         ("C-." . consult-rg)
 
          ;; M-g bindings in `goto-map'
          ("M-g e" . consult-compile-error)
@@ -122,7 +122,7 @@
     consult-goto-line
     consult-theme :preview-key '(:debounce 0.4 any))
 
-  (defun fate/consult-to-color-rg ()
+  (defun consult-to-color-rg ()
     (interactive)
     (pcase-let* ((`(,arg . ,opts) (consult--command-split (minibuffer-contents)))
                  (`(,re . ,hl) (funcall consult--regexp-compiler arg 'pcre nil)))
@@ -134,14 +134,14 @@
       (append consult-buffer-filter
               '("\\`\\*")))
 
-  (defvar fate/consult-rg-map
+  (defvar consult-rg-map
     (let ((map (make-sparse-keymap)))
-      (define-key map (kbd "M-i") #'fate/consult-to-color-rg)
+      (define-key map (kbd "M-i") #'consult-to-color-rg)
       map))
 
   (consult-customize
-    fate/consult-rg consult-ripgrep consult-grep
-    :keymap fate/consult-rg-map)
+    consult-rg consult-ripgrep consult-grep
+    :keymap consult-rg-map)
 
   ;; Optionally configure the narrowing key.
   ;; Both < and C-+ work reasonably well.
@@ -153,7 +153,7 @@
 
   (setq consult-ripgrep-args (concat consult-ripgrep-args " --hidden --glob \"!**/.git/**\""))
 
-  (defun fate/consult-rg (&optional dir given-initial)
+  (defun consult-rg (&optional dir given-initial)
     (interactive "P")
     (let ((initial (or given-initial
                        (when (use-region-p)
