@@ -8,6 +8,7 @@ alias kk='kill -9 %'
 alias gka='gitk --all'
 alias fixmerge="emacs \`git diff --name-only  --relative --diff-filter=U\`"
 alias fn='find -name '
+alias bs='bootstrap'
 
 gkas(){
     gitk --all --select-commit="$1"
@@ -282,6 +283,7 @@ replacesim() {
      cd $path
 }
 
+
 shell(){
     if [ $# -eq 0 ]; then
         poetry run bootstrap shell
@@ -293,20 +295,44 @@ shell(){
 }
 complete -F _remote_bootstrap_shell shell
 
-
-
 fullpathsearchsimtest() {
-    /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/scripts/run-simulator-tests.py ~/checkoutroot/tsl_simulator/ /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/ros2/nodes/simulation_tests/simulation_tests/"$@"
+    /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/scripts/run-simulator-tests.py package --simulator-package-dir ~/checkoutroot/tsl_simulator/ /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/ros2/nodes/simulation_tests/simulation_tests/"$@"
 }
 complete -o nospace -F _complete_test_path fullpathsearchsimtest
 
 simtest() {
     base_path="/home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/ros2/nodes/simulation_tests/simulation_tests"
     opts=$(find "$base_path" -name "$1")
+    # TODO Parse to toggle backend container type to TWC or MPOC?
     shift
-    if [[ $opts == *multi* ]]; then
-       opts+=" --multi-robot"
-    fi
-    /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/scripts/run-simulator-tests.py ~/checkoutroot/tsl_simulator/ $opts "$@"
+    # package --simulator-package-dir ~/checkoutroot/tsl_simulator/ # Replaces container (maybe not up to date)
+    #  --backend-container TWC # Pass as argument
+    /home/antoine-rioux/checkoutroot/tsl_robot/tsl_robot/scripts/run-simulator-tests.py container --simulator-image-tag v28.3.0 script $opts --time-scale 4.0 --planning-sim  "$@"
 }
 complete -o nospace -F _test_autocomplete simtest
+
+declare -A ROBOT_MAP=(
+    [10b-4-intel]="mi-0e4b40914aebed76d"
+    [10b-4-nvidia]="mi-0fa124d061477e412"
+    [10b-5-intel]="mi-0da011ba2f6632349"
+    [10b-5-nvidia]="mi-097f0b630258bfa95"
+    [10b-6-intel]="mi-03a193f89fa13fb61"
+    [10b-6-nvidia]="mi-0d309edd14ea06d55"
+    [10b-7-intel]="mi-0535231d5ff8ef463"
+    [10b-7-nvidia]="mi-009e5fba6f805d02a"
+    [10b-8-intel]="mi-02b53023c11df28a6"
+    [10b-8-nvidia]="mi-05926e7ffa2dfcdf5"
+)
+_robot_name_autocomplete() {
+    local cur opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts="${!ROBOT_MAP[@]}"
+    COMPREPLY=( $(compgen -W "$opts" -- "$cur") )
+    return 0
+}
+
+connect_twc() {
+    aws ssm start-session --profile twc --target "${ROBOT_MAP[$1]}" --document-name AWS-StartPortForwardingSession --parameters '{"portNumber":["22"],"localPortNumber":["10022"]}'
+}
+complete -o nospace -F _robot_name_autocomplete connect_twc
