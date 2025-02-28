@@ -24,5 +24,6 @@
 (require 'core-lsp)
 (require 'core-hydra)
 (require 'core-docker)
+(require 'core-vterm)
 
 (provide 'init)
